@@ -49,15 +49,15 @@
     <include>
       <uri>model://red_cylinder</uri>
       <name>red_cylinder</name>
-      <pose>0.22 0.12 0.175 0 0 0</pose>
+      <pose>0.4 0.12 0.175 0 0 0</pose>
     </include>
 
     <!-- Include the other objects -->
 
-    <include>
+    <!-- <include>
       <uri>model://mustard</uri>
       <pose>0.7 0.15 0.08 0 0 0</pose>
-    </include>
+    </include> -->
 
     <include>
       <uri>model://cheezit_big_original</uri>
@@ -72,6 +72,13 @@
     <include>
       <uri>model://coke_can</uri>
       <pose>0.5 0.15 0.15 0 0 2.3</pose>
+    </include>
+
+    <include>
+      <uri>model:///home/brandon/Downloads/ACE_Coffee_Mug_Kristen_16_oz_cup</uri>
+      <name>coffee_mug</name>
+      <scale>0.5 0.5 0.5</scale>
+      <pose>0.22 0.12 0.05 0 0 0</pose>
     </include>
 
     <!-- Define scene properties -->

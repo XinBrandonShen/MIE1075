@@ -31,7 +31,9 @@ moveit_package()
 
 # Define required packages (alphabetical order)
 set(REQUIRED_PACKAGES
+  geometry_msgs # New
   moveit_core
+  moveit_msgs # New
   moveit_ros_planning
   moveit_ros_planning_interface
   moveit_task_constructor_core
@@ -43,8 +45,10 @@ set(REQUIRED_PACKAGES
   rclcpp
   sensor_msgs
   shape_msgs
+  std_srvs # New
   tf2_eigen
   tf2_geometry_msgs
+  tf2_ros # New
 )
 
 # Find required packages
@@ -121,11 +125,21 @@ add_executable(mtc_node src/mtc_node.cpp)
 ament_target_dependencies(mtc_node ${dependencies})
 target_link_libraries(mtc_node get_planning_scene_client)
 
+## mtc_graspnet_node (NEW)
+add_executable(mtc_graspnet_node src/mtc_graspnet_node.cpp)
+target_include_directories(mtc_graspnet_node PUBLIC
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+  $<INSTALL_INTERFACE:include>
+)
+ament_target_dependencies(mtc_graspnet_node ${dependencies})
+target_link_libraries(mtc_graspnet_node get_planning_scene_client)
+
 # Installation
 set(EXECUTABLES
   get_planning_scene_client_node
   get_planning_scene_server
   mtc_node
+  mtc_graspnet_node   # New Add
 )
 
 set(LIBRARIES

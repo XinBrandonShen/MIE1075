@@ -89,8 +89,9 @@ int main(int argc, char** argv) {
 
   // Cartesian path planner (lowest computational requirements, best for straight-line paths with no obstacles)
   auto cartesian = std::make_shared<solvers::CartesianPath>();
-  cartesian->setJumpThreshold(2.0);
-  RCLCPP_INFO(logger, "Cartesian path planner set up with jump threshold: 2.0");
+  //// 旧代码cartesian->setJumpThreshold(2.0);
+  //cartesian->setPrecision(0.01);
+  RCLCPP_INFO(logger, "Cartesian path planner set up with default");
 
   // Create PipelinePlanner for Pilz (moderate computational requirements, inherently considers obstacles)
   // Found via -> ros2 service call /query_planner_interface moveit_msgs/srv/QueryPlannerInterfaces "{}"
