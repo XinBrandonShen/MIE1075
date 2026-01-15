@@ -1,0 +1,80 @@
+# mtc_graspnet_params.yaml
+# Parameters for MTC node with GraspNet integration
+
+mtc_graspnet_node:
+  ros__parameters:
+    # ===== General =====
+    execute: false                    # Set to true to execute after planning
+    max_solutions: 10                 # Number of solutions to compute
+    use_graspnet: true               # Use GraspNet for grasp poses
+    fallback_to_center: true         # Fallback to center-based if GraspNet fails
+
+    # ===== Controllers =====
+    controller_names:
+      - "arm_controller"
+      - "grip_action_controller"
+
+    # ===== Robot Configuration =====
+    arm_group_name: "arm"
+    gripper_group_name: "gripper"
+    gripper_frame: "link6_flange"
+    gripper_open_pose: "open"
+    gripper_close_pose: "half_closed"
+    arm_home_pose: "home"
+
+    # ===== Frames =====
+    world_frame: "base_link"
+
+    # ===== Object Parameters =====
+    # These are defaults - will be updated from perception
+    object_name: "object"
+    object_type: "cylinder"           # "cylinder" or "box"
+    object_reference_frame: "base_link"
+    object_dimensions: [0.10, 0.025]  # [height, radius] for cylinder
+    object_pose: [0.35, 0.08, 0.05, 0.0, 0.0, 0.0]  # [x, y, z, roll, pitch, yaw]
+
+    # ===== Grasp Parameters =====
+    # Transform from gripper frame to tool center point (TCP)
+    # [x, y, z, roll, pitch, yaw]
+    grasp_frame_transform: [0.0, 0.0, 0.096, 1.5708, 0.0, 0.0]
+    
+    # Place pose [x, y, z, roll, pitch, yaw]
+    place_pose: [0.0, -0.20, 0.05, 0.0, 0.0, 0.0]
+
+    # ===== Motion Planning Distances =====
+    approach_object_min_dist: 0.005
+    approach_object_max_dist: 0.15
+    lift_object_min_dist: 0.01
+    lift_object_max_dist: 0.15
+    lower_object_min_dist: 0.01
+    lower_object_max_dist: 0.20
+    retreat_min_distance: 0.01
+    retreat_max_distance: 0.15
+
+    # ===== Timeout Parameters =====
+    move_to_pick_timeout: 10.0
+    move_to_place_timeout: 10.0
+
+    # ===== Grasp Generation =====
+    # For center-based grasping (when GraspNet fails)
+    grasp_pose_angle_delta: 0.2618    # ~15 degrees
+    grasp_pose_max_ik_solutions: 8
+    grasp_pose_min_solution_distance: 0.5
+
+    # ===== Place Generation =====
+    place_pose_max_ik_solutions: 8
+    place_pose_z_offset_factor: 0.5
+
+    # ===== Cartesian Planner =====
+    cartesian_max_velocity_scaling: 0.3
+    cartesian_max_acceleration_scaling: 0.3
+    cartesian_step_size: 0.005
+
+    # ===== Direction Vectors =====
+    approach_object_direction_z: 1.0   # Approach along gripper Z
+    lift_object_direction_z: 1.0       # Lift up in world frame
+    lower_object_direction_z: -1.0     # Lower down in world frame
+    retreat_direction_z: -1.0          # Retreat along gripper Z (back)
+
+    # ===== GraspNet Integration =====
+    graspnet_timeout: 30.0            # Seconds to wait for GraspNet
